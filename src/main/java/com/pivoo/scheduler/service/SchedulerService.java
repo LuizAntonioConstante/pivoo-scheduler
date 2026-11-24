@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class SchedulerService {
@@ -12,6 +14,24 @@ public class SchedulerService {
     public void checkTimeslots(){
 
         System.out.println("Verifying the timeslots...");
+
+        List<LocalDate> schedules = List.of(
+                LocalDate.of(2026,10,20),
+                LocalDate.of(2026,11,5),
+                LocalDate.of(2026,11,18),
+                LocalDate.of(2026,11,2)
+        );
+
+        List<LocalDate> schedulesNew = new ArrayList<>();
+
+        for (LocalDate date : schedules){
+            LocalDate scheduleNewDate = calculateNextDate(date);
+            schedulesNew.add(scheduleNewDate);
+        };
+
+        System.out.println(schedulesNew);
+
+
     }
 
     public void testLate() {
@@ -21,6 +41,8 @@ public class SchedulerService {
 
         System.out.println("The schedule date is: " + scheduleDate);
         System.out.println("The schedule new date is: " + scheduleNewDate);
+
+
 
     }
 
@@ -32,8 +54,7 @@ public class SchedulerService {
 
             scheduleNewDate = scheduleNewDate.plusWeeks(1);
         }
+
         return scheduleNewDate;
-
     }
-
 }
